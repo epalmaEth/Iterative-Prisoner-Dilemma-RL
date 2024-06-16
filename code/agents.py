@@ -39,8 +39,12 @@ class Fixed_Agent():
 class RL_Agent():
 
     def __init__(self, i, n_learners, n_history, max_steps) -> None:
-        self.brain = Q_RL(n_history, max_steps, alpha_mode="Adaptive")
-        # self.brain = Q_RL(n_history, max_steps, alpha_mode="Non_Adaptive")
+        # self.brain = Q_RL(n_history, alpha_mode="Adaptive", exploration="Proportional")
+        self.brain = Q_RL(n_history, alpha_mode="Armonic", exploration="Proportional")
+        # self.brain = Q_RL(n_history, alpha_mode="Fixed", exploration="Proportional")
+        # self.brain = Q_RL(n_history, alpha_mode="Adaptive", exploration="Uniform")
+        # self.brain = Q_RL(n_history, alpha_mode="Armonic", exploration="Uniform")
+        # self.brain = Q_RL(n_history, alpha_mode="Fixed", exploration="Uniform")
         self.type = f"RL{i+1}" if n_learners > 1 else "RL"
 
     def reset(self, opponent):

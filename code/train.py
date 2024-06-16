@@ -10,13 +10,12 @@ def train(max_steps, plot):
     # Init Logs
     epochs = int(1e05)
     plot_frequency = 200
-    # epochs = int(2e00)
-    # max_steps = 5
+    # epochs = int(1e00)
     # plot_frequency = 1
 
     prob_return = False
 
-    n_learners = 4
+    n_learners = 8
     fixed_players = {  # type_player:n_players
         # "Cu": 1,
         # "Du": 1,
@@ -78,8 +77,8 @@ def train(max_steps, plot):
             plt.clf()
             plt.xlabel("Games")
             plt.ylabel("Average Reward")
-            # plt.ylim(bottom=0, top=max_steps*5+0.1)
-            plt.ylim(bottom=max_steps*2-0.1, top=max_steps*6+0.1)
+            plt.ylim(bottom=0, top=max_steps*5+0.1)
+            # plt.ylim(bottom=max_steps*2-0.1, top=max_steps*6+0.1)
             plt.title("Training Progress")
             plt.grid()
             for key, value in player_types.items():
@@ -97,7 +96,7 @@ def train(max_steps, plot):
         print("Learned Q")
         for index, element in np.ndenumerate(agents[0].brain.Q):
             index = "".join([mapping.get(x, x) for x in list(index)])
-            print(f"Case {index}: {element}")
+            print(f"Case {index}: {element*(1-agents[0].brain.gamma)}")
 
         print("Counts")
         for index, element in np.ndenumerate(agents[0].brain.count):
